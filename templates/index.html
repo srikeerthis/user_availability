@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}" />
+    <title>User Availability</title>
+  </head>
+  <body>
+    <table>
+      <tr>
+        <th>User</th>
+        <th>Status</th>
+      </tr>
+      {% for user in users%}
+      <tr>
+        <td>{{user.name}}</td>
+        <td>{{user.status}}</td>
+      </tr>
+      {%endfor%}
+    </table>
+  </body>
+</html>
