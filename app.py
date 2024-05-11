@@ -42,5 +42,13 @@ def update_user(user_id):
         db.session.commit()
         return redirect(url_for('index'))
     return render_template('update_user.html',user=user)
+
+@app.route("/delete_user/<int:user_id>",methods=['POST'])
+def delete_user(user_id):
+    user= User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit
+    return redirect(url_for('index'))
+        
 if __name__ == '__main__':
     app.run(debug=True)
