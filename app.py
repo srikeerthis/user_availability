@@ -18,6 +18,17 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.name}>'
 
+@app.route('/add_user',methods=['GET','POST'])
+def add_user():
+    if request.method == 'POST':
+        name = request.form['name']
+        status = request.form['status']
+        new_user = User(name=name,status=status)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('add_user.html')
+
 @app.route('/')
 def index():
     users = User.query.all()
