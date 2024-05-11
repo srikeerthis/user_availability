@@ -34,9 +34,13 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
-@app.route('/api/users')
-def api_users():
-    return jsonify(users)
-
+@app.route('/update_user/<int:user_id>',methods=['GET','POST'])
+def update_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if request.method=='POST':
+        user.status = request.form['status']
+        db.session.commit()
+        return redirect(url_for('index'))
+    return render_template('update_user.html',user=user)
 if __name__ == '__main__':
     app.run(debug=True)
