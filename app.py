@@ -47,7 +47,7 @@ def update_user(user_id):
 def delete_user(user_id):
     user= User.query.get_or_404(user_id)
     db.session.delete(user)
-    db.session.commit
+    db.session.commit()
     return redirect(url_for('index'))
         
 if __name__ == '__main__':
